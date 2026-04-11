@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="brand">
+                <span class="brand-icon">📅</span>
+                <span class="brand-name">Agenda</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="app.html" class="nav-item active">
+                <span class="nav-icon">📆</span>
+                <span class="nav-label">Weekly View</span>
+            </a>
+            <a href="planning.html" class="nav-item">
+                <span class="nav-icon">📋</span>
+                <span class="nav-label">Planning</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <span class="user-name" id="userName">User</span>
+            </div>
+            <button class="btn-icon" onclick="signOut()" title="Sign out">🚪</button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="app-header">
+            <div class="header-left">
+                <button class="sidebar-toggle-mobile btn-icon" onclick="toggleSidebar()">☰</button>
+                <div class="week-nav">
+                    <button class="btn-icon" onclick="navigateWeek(-1)">‹</button>
+                    <h2 id="weekTitle">Loading...</h2>
+                    <button class="btn-icon" onclick="navigateWeek(1)">›</button>
+                </div>
+                <button class="btn btn-ghost" onclick="goToToday()">Today</button>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-primary" onclick="openTaskModal()">+ Add Task</button>
+            </div>
+        </header>
+
+        <div class="calendar-container">
+            <div class="calendar-grid" id="calendarGrid">
+                <div class="loading-spinner">Loading calendar...</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Task Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeTaskModal()"></div>
+    <div class="modal" id="taskModal">
+        <div class="modal-header">
+            <h3 id="modalTitle">New Task</h3>
+            <button class="btn-icon" onclick="closeTaskModal()">✕</button>
+        </div>
+        <form id="taskForm" class="modal-body">
+            <div class="form-group">
+                <label>Title *</label>
+                <input type="text" id="taskTitle" placeholder="Task title" required>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="taskDescription" placeholder="Add details..." rows="3"></textarea>
+            </div>
+            <div class="form-row">
+                <div class="form-group flex-1">
+                    <label>Date *</label>
+                    <input type="date" id="taskDate" required>
+                </div>
+                <div class="form-group flex-1">
+                    <label>Time</label>
+                    <input type="time" id="taskTime">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group flex-1">
+                    <label>Priority</label>
+                    <select id="taskPriority">
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div class="form-group flex-1">
+                    <label>Category</label>
+                    <select id="taskCategory">
+                        <option value="Work">Work</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Health">Health</option>
+                        <option value="Education">Education</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Social">Social</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger-ghost" id="deleteTaskBtn" onclick="deleteCurrentTask()" style="display:none">Delete</button>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost" onclick="closeTaskModal()">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="saveTaskBtn">Save Task</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/tasks.js"></script>
+    <script src="js/calendar.js"></script>
+</body>
+</html>

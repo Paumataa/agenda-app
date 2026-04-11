@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planning - Agenda App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="brand">
+                <span class="brand-icon">📅</span>
+                <span class="brand-name">Agenda</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="app.html" class="nav-item">
+                <span class="nav-icon">📆</span>
+                <span class="nav-label">Weekly View</span>
+            </a>
+            <a href="planning.html" class="nav-item active">
+                <span class="nav-icon">📋</span>
+                <span class="nav-label">Planning</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="user-info">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <span class="user-name" id="userName">User</span>
+            </div>
+            <button class="btn-icon" onclick="signOut()" title="Sign out">🚪</button>
+        </div>
+    </aside>
+
+    <main class="main-content">
+        <header class="app-header">
+            <div class="header-left">
+                <button class="sidebar-toggle-mobile btn-icon" onclick="toggleSidebar()">☰</button>
+                <h2>Planning Templates</h2>
+            </div>
+            <div class="header-right">
+                <button class="btn btn-primary" onclick="openTemplateModal()">+ New Template</button>
+            </div>
+        </header>
+
+        <div class="planning-container">
+            <p class="planning-subtitle">Create reusable weekly or monthly templates to quickly populate your calendar.</p>
+            <div class="templates-grid" id="templatesGrid">
+                <div class="loading-spinner">Loading templates...</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- New Template Modal -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeTemplateModal()"></div>
+    <div class="modal" id="templateModal">
+        <div class="modal-header">
+            <h3>New Template</h3>
+            <button class="btn-icon" onclick="closeTemplateModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Template Name *</label>
+                <input type="text" id="templateName" placeholder="e.g. Work Week, Study Routine">
+            </div>
+            <div class="form-group">
+                <label>Type</label>
+                <select id="templateType">
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea id="templateDescription" placeholder="What is this template for?" rows="3"></textarea>
+            </div>
+            <div class="modal-footer">
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost" onclick="closeTemplateModal()">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveTemplate()">Create Template</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Apply Template Modal -->
+    <div class="modal-overlay" id="applyOverlay" onclick="closeApplyModal()"></div>
+    <div class="modal" id="applyModal">
+        <div class="modal-header">
+            <h3>Apply Template</h3>
+            <button class="btn-icon" onclick="closeApplyModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Start Week (select a Monday)</label>
+                <input type="date" id="applyDate">
+            </div>
+            <p class="text-muted">Tasks from this template will be added starting on the selected date.</p>
+            <div class="modal-footer">
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost" onclick="closeApplyModal()">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="confirmApplyTemplate()">Apply Template</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/planning.js"></script>
+</body>
+</html>
