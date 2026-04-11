@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda App</title>
+    <title>Monthly View - Agenda App</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
@@ -18,11 +18,11 @@
             </div>
         </div>
         <nav class="sidebar-nav">
-            <a href="app.html" class="nav-item active">
+            <a href="app.html" class="nav-item">
                 <span class="nav-icon">📆</span>
                 <span class="nav-label">Weekly View</span>
             </a>
-            <a href="month.html" class="nav-item">
+            <a href="month.html" class="nav-item active">
                 <span class="nav-icon">🗓️</span>
                 <span class="nav-label">Monthly View</span>
             </a>
@@ -46,26 +46,37 @@
             <div class="header-left">
                 <button class="sidebar-toggle-mobile btn-icon" onclick="toggleSidebar()">☰</button>
                 <div class="week-nav">
-                    <button class="btn-icon" onclick="navigateWeek(-1)">‹</button>
-                    <h2 id="weekTitle">Loading...</h2>
-                    <button class="btn-icon" onclick="navigateWeek(1)">›</button>
+                    <button class="btn-icon" onclick="navigateMonth(-1)">‹</button>
+                    <h2 id="monthTitle">Loading...</h2>
+                    <button class="btn-icon" onclick="navigateMonth(1)">›</button>
                 </div>
-                <button class="btn btn-ghost" onclick="goToToday()">Today</button>
+                <button class="btn btn-ghost" onclick="goToCurrentMonth()">Today</button>
             </div>
             <div class="header-right">
                 <button class="btn btn-primary" onclick="openTaskModal()">+ Add Task</button>
             </div>
         </header>
 
-        <div class="calendar-container">
-            <div class="calendar-grid" id="calendarGrid">
-                <div class="loading-spinner">Loading calendar...</div>
+        <div class="month-container">
+            <!-- Day name headers -->
+            <div class="month-day-names">
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+                <div>Sun</div>
+            </div>
+            <!-- Calendar grid -->
+            <div class="month-grid" id="monthGrid">
+                <div class="loading-spinner">Loading...</div>
             </div>
         </div>
     </main>
 
     <!-- Task Modal -->
-    <div class="modal-overlay" id="modalOverlay" onclick="closeTaskModal()"></div>
+    <div class="modal-overlay" id="modalOverlay"></div>
     <div class="modal" id="taskModal">
         <div class="modal-header">
             <h3 id="modalTitle">New Task</h3>
@@ -128,6 +139,6 @@
     <script src="js/config.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/tasks.js"></script>
-    <script src="js/calendar.js"></script>
+    <script src="js/month.js"></script>
 </body>
 </html>

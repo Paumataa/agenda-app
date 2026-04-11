@@ -727,6 +727,160 @@ textarea { resize: vertical; }
 }
 
 /* ====================================
+   MONTHLY VIEW
+   ==================================== */
+.month-container {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    overflow: auto;
+}
+
+.month-day-names {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.month-day-names div {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 6px 0;
+}
+
+.month-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    flex: 1;
+}
+
+.month-cell {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    min-height: 110px;
+    padding: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    transition: border-color 0.2s;
+    overflow: hidden;
+}
+
+.month-cell:hover { border-color: #cbd5e1; }
+
+.month-cell.today {
+    border-color: var(--primary);
+    background: #fafafe;
+}
+
+.month-cell-empty {
+    background: transparent;
+    border: 1px solid transparent;
+}
+
+.month-cell-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2px;
+}
+
+.month-day-number {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+}
+
+.month-cell.today .month-day-number {
+    color: var(--white);
+    background: var(--primary);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.month-add-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    padding: 0 2px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: all 0.15s;
+    font-family: inherit;
+}
+
+.month-cell:hover .month-add-btn { opacity: 1; }
+.month-add-btn:hover { background: var(--primary-light); color: var(--primary); }
+
+.month-cell-tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow: hidden;
+}
+
+.month-task-pill {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    border-left: 2px solid transparent;
+    background: var(--secondary);
+    transition: all 0.15s;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.month-task-pill:hover { filter: brightness(0.95); }
+
+.month-task-pill.priority-high   { border-left-color: var(--danger);  background: #fef2f2; }
+.month-task-pill.priority-medium { border-left-color: var(--warning); background: #fffbeb; }
+.month-task-pill.priority-low    { border-left-color: var(--success); background: #f0fdf4; }
+
+.month-task-time {
+    font-weight: 700;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    font-size: 10px;
+}
+
+.month-task-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.month-more {
+    font-size: 10px;
+    color: var(--primary);
+    font-weight: 600;
+    padding: 1px 4px;
+    cursor: pointer;
+}
+
+/* ====================================
    MOBILE / RESPONSIVE
    ==================================== */
 .sidebar-toggle-mobile {
