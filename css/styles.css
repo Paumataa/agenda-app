@@ -727,6 +727,112 @@ textarea { resize: vertical; }
 }
 
 /* ====================================
+   NOTIFICATIONS MODAL
+   ==================================== */
+.notif-section { padding: 4px 0; }
+
+.notif-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.notif-section-title { font-weight: 600; font-size: 14px; }
+.notif-section-desc  { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+.notif-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 16px 0;
+}
+
+.notif-perm-row {
+    font-size: 12px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.notif-perm-status { font-weight: 600; }
+.notif-perm-status.granted { color: var(--success); }
+.notif-perm-status.denied  { color: var(--danger); }
+.notif-perm-status.default { color: var(--warning); }
+
+/* Toggle switch */
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+    flex-shrink: 0;
+}
+
+.toggle input { opacity: 0; width: 0; height: 0; }
+
+.toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: #cbd5e1;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: white;
+    border-radius: 50%;
+    left: 3px;
+    top: 3px;
+    transition: transform 0.2s;
+    box-shadow: var(--shadow);
+}
+
+.toggle input:checked + .toggle-slider { background: var(--primary); }
+.toggle input:checked + .toggle-slider::before { transform: translateX(18px); }
+
+/* EmailJS details */
+.notif-emailjs-details {
+    margin-top: 4px;
+    font-size: 13px;
+}
+
+.notif-emailjs-details summary {
+    cursor: pointer;
+    color: var(--text-muted);
+    font-weight: 500;
+    user-select: none;
+    padding: 4px 0;
+}
+
+.notif-help-link { font-weight: 400; }
+.notif-help-link a { color: var(--primary); text-decoration: none; }
+.notif-help-link a:hover { text-decoration: underline; }
+
+.notif-emailjs-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    background: var(--secondary);
+    padding: 10px 12px;
+    border-radius: var(--radius);
+    line-height: 1.8;
+}
+
+.notif-emailjs-hint code {
+    background: var(--border);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: monospace;
+}
+
+/* ====================================
    MONTHLY VIEW
    ==================================== */
 .month-container {

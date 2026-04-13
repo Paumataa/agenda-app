@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const session = await checkAuth();
     if (!session) return;
     await renderCalendar();
+    await initNotifications(session.user);
 });
 
 // ---- Date helpers ----

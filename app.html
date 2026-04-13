@@ -53,6 +53,7 @@
                 <button class="btn btn-ghost" onclick="goToToday()">Today</button>
             </div>
             <div class="header-right">
+                <button class="btn-icon" onclick="openNotifSettings()" title="Notification settings">🔔</button>
                 <button class="btn btn-primary" onclick="openTaskModal()">+ Add Task</button>
             </div>
         </header>
@@ -122,12 +123,92 @@
         </form>
     </div>
 
+    <!-- Notification Settings Modal -->
+    <div class="modal-overlay" id="notifOverlay" onclick="closeNotifSettings()"></div>
+    <div class="modal" id="notifModal">
+        <div class="modal-header">
+            <h3>🔔 Notification Settings</h3>
+            <button class="btn-icon" onclick="closeNotifSettings()">✕</button>
+        </div>
+        <div class="modal-body">
+
+            <!-- Browser Notifications -->
+            <div class="notif-section">
+                <div class="notif-section-header">
+                    <div>
+                        <div class="notif-section-title">Browser Notifications</div>
+                        <div class="notif-section-desc">Daily summary + 15-min reminders before tasks</div>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" id="notifBrowserEnabled">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="notif-perm-row">
+                    Permission: <span id="notifPermStatus" class="notif-perm-status">checking...</span>
+                </div>
+            </div>
+
+            <div class="notif-divider"></div>
+
+            <!-- Email Notifications -->
+            <div class="notif-section">
+                <div class="notif-section-header">
+                    <div>
+                        <div class="notif-section-title">Daily Email Summary</div>
+                        <div class="notif-section-desc">Sent once per day when you open the app</div>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" id="notifEmailEnabled">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="form-group" style="margin-top:14px">
+                    <label>Your Email Address</label>
+                    <input type="email" id="notifEmail" placeholder="you@gmail.com">
+                </div>
+
+                <details class="notif-emailjs-details">
+                    <summary>EmailJS credentials <span class="notif-help-link">— <a href="https://www.emailjs.com" target="_blank">Get free account</a></span></summary>
+                    <div style="margin-top:12px; display:flex; flex-direction:column; gap:12px;">
+                        <div class="form-group">
+                            <label>Service ID</label>
+                            <input type="text" id="notifEmailjsService" placeholder="service_xxxxxxx">
+                        </div>
+                        <div class="form-group">
+                            <label>Template ID</label>
+                            <input type="text" id="notifEmailjsTemplate" placeholder="template_xxxxxxx">
+                        </div>
+                        <div class="form-group">
+                            <label>Public Key</label>
+                            <input type="text" id="notifEmailjsKey" placeholder="xxxxxxxxxxxxxxxxxxxxxx">
+                        </div>
+                        <p class="notif-emailjs-hint">
+                            In your EmailJS template use these variables:<br>
+                            <code>{{to_name}}</code> <code>{{date}}</code> <code>{{task_count}}</code> <code>{{task_list}}</code>
+                        </p>
+                    </div>
+                </details>
+            </div>
+
+            <div class="modal-footer">
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-ghost" onclick="closeNotifSettings()">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveNotifSettingsForm()">Save Settings</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="toast" id="toast"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="js/config.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/tasks.js"></script>
+    <script src="js/notifications.js"></script>
     <script src="js/calendar.js"></script>
 </body>
 </html>
